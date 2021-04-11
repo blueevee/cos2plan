@@ -1,18 +1,43 @@
 #:kivy 2.0.0
 
+<SwipeToDeleteItem>:
+    size_hint_y: None
+    height: content.height
+    type_swipe: "auto"
+    on_swipe_complete: app.on_swipe_complete(root)
+
+    MDCardSwipeLayerBox:
+
+    MDCardSwipeFrontBox:
+
+        OneLineListItem:
+            id: content
+            text: root.text
+            _no_ripple_effect: True
+
 <MainScreen>:
     MDBoxLayout:
         orientation: "vertical"
         adaptive_height: True
         size_hint: 1,1
-        md_bg_color: 0,1,1,1
+        # md_bg_color: 0,1,1,1
         MDToolbar:
+            elevation: 10
             title: "COS2PLAN"
-            md_bg_color: 0,0.3,0.6,1
+            size_hint_y: 0.5
+            md_bg_color: 0,0.3,0.6,0.4
+            # icon: "plus"
+            # type: "top"
+            # left_action_items: [["menu", lambda x: x]]
+            # mode: "end"
+        # MDBottomAppBar:
+        # ScrollView:
+        #     MDList:
+        #         id: md_list
+        #         padding: 0
         MDLabel:
             text: "BLUEEEEVEE"
             halign: "center"
-            size_hint_y: 0.2
             theme_text_color: "Custom"
             text_color: 0, 0, 1, 1
         MDLabel:
@@ -46,4 +71,3 @@
             halign: "center"
             theme_text_color: "Custom"
             text_color: 0, 0, 1, 1
-                 
