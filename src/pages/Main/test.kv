@@ -1,73 +1,102 @@
 #:kivy 2.0.0
-
-<SwipeToDeleteItem>:
-    size_hint_y: None
-    height: content.height
-    type_swipe: "auto"
-    on_swipe_complete: app.on_swipe_complete(root)
-
-    MDCardSwipeLayerBox:
-
-    MDCardSwipeFrontBox:
-
-        OneLineListItem:
-            id: content
-            text: root.text
-            _no_ripple_effect: True
+<MyScreenManager>:
+    MainScreen:
+    NewCosplayScreen:
 
 <MainScreen>:
+    name: "main"
     MDBoxLayout:
         orientation: "vertical"
         adaptive_height: True
         size_hint: 1,1
-        # md_bg_color: 0,1,1,1
         MDToolbar:
             elevation: 10
             title: "COS2PLAN"
-            size_hint_y: 0.5
-            md_bg_color: 0,0.3,0.6,0.4
-            # icon: "plus"
-            # type: "top"
-            # left_action_items: [["menu", lambda x: x]]
-            # mode: "end"
-        # MDBottomAppBar:
-        # ScrollView:
-        #     MDList:
-        #         id: md_list
-        #         padding: 0
+            height: "50dp"
+            md_bg_color: 0.7,0,0,1
+            MDIconButton:
+                icon: "plus-circle"
+                theme_text_color: "Custom"
+                pos_hint_y: 0.5
+                on_press: root.manager.current = "new-cosplay"
+                text_color: app.theme_cls.primary_color
+
+        MDBottomNavigation:
+            panel_color: .2, .2, .2, 1
+            MDBottomNavigationItem:
+                name: 'screen 1'
+                text: 'Cosplanners'
+                icon: 'hanger'
+                ScrollView:
+                    MDList:
+                        TwoLineAvatarListItem:
+                            text: "abc"
+                            secondary_text: 'Secondary text'
+                            ImageLeftWidget:
+                                source: "cosplay.png"
+                        TwoLineAvatarListItem:
+                            text: "EEEE"
+                            secondary_text: 'text'
+                            ImageLeftWidget:
+                                source: "cosplay.png"
+            MDBottomNavigationItem:
+                name: 'screen 3'
+                text: 'Perfil'
+                icon: 'shield-account'
+                MDBoxLayout:
+                    MDLabel:
+                        text: "Novo cosplay"
+                        halign: "center"
+                        pos_hint: {"center_x": .5, "center_y": .8}
+
+<NewCosplayScreen>:
+    name: "new-cosplay"
+    FloatLayout:
         MDLabel:
-            text: "BLUEEEEVEE"
+            text: "Novo cosplay"
             halign: "center"
+            pos_hint: {"center_x": .5, "center_y": .8}
+        MDTextField:
+            id: name
+            hint_text: "Personagem"
+            icon_right: "face-agent"
+            helper_text: "Ex: Hatsune Mei"
+            helper_text_mode: "on_focus"
+            size_hint_x: .8
+            pos_hint: {"center_x": .5, "center_y": .7}
+        MDTextField:
+            id: origin
+            hint_text: "Origem"
+            icon_right: "television-classic"
+            helper_text: "Ex: Boku no Hero Academia"
+            helper_text_mode: "on_focus"
+            size_hint_x: .8
+            pos_hint: {"center_x": .5, "center_y": .6}
+        MDTextField:
+            id: budget
+            hint_text: "Orçamento"
+            icon_right: "piggy-bank"
+            helper_text: "Ex: 450"
+            helper_text_mode: "on_focus"
+            size_hint_x: .8
+            pos_hint: {"center_x": .5, "center_y": .5}
+        MDTextField:
+            id: url
+            hint_text: "Url da imagem"
+            icon_right: "image-size-select-actual"
+            helper_text: "Link de um imagem do seu personagem"
+            helper_text_mode: "on_focus"
+            size_hint_x: .8
+            pos_hint: {"center_x": .5, "center_y": .4}
+        MDRaisedButton:
+            text: "SALVAR"
+            # md_bg_color: 1, 0, 1, 1
+            on_release: root.show_data(name.text, origin.text, budget.text, url.text)
+            pos_hint: {"center_x": .4, "center_y": .3}
+        MDRectangleFlatButton:
+            text: "CANCELAR"
+            on_press: root.manager.current = "main"
             theme_text_color: "Custom"
-            text_color: 0, 0, 1, 1
-        MDLabel:
-            text: "BLUEEEEVEE"
-            halign: "center"
-            size_hint_y: 0.2
-            theme_text_color: "Custom"
-            text_color: 0, 0, 1, 1
-        MDLabel:
-            text: "BLUEEEEVEE"
-            halign: "center"
-            size_hint_y: 0.2
-            theme_text_color: "Custom"
-            text_color: 0, 0, 1, 1
-        MDLabel:
-            text: "BLUEEEEVEE"
-            halign: "center"
-            theme_text_color: "Custom"
-            text_color: 0, 0, 1, 1
-        MDLabel:
-            text: "BLUEEEEVEE"
-            halign: "center"
-            theme_text_color: "Custom"
-            text_color: 0, 0, 1, 1
-        MDLabel:
-            text: "BLUEEEEVEE"
-            halign: "center"
-            theme_text_color: "Error"
-        MDLabel:
-            text: "BLUEEEEVEE"
-            halign: "center"
-            theme_text_color: "Custom"
-            text_color: 0, 0, 1, 1
+            # text_color: 1, 0, 0, 1
+            # line_color: 0, 0, 1, 1
+            pos_hint: {"center_x": .7, "center_y": .3}
